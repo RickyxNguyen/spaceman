@@ -84,6 +84,22 @@ def is_guess_in_word(guess, secret_word):
     else:
         return False
 
+def playagain(play):
+ while True:
+    player = input("Would you like to play again? (y/n): ").lower()
+    if player.isalpha():
+        if player=='y':
+            spaceman(secret_word)
+        elif player =='n':
+            print('Bye Bye!')
+            break
+        else:
+            print('Not an option!')
+            continue
+    else:
+        print('Not a letter!')
+        continue
+
 
 
 
@@ -135,8 +151,12 @@ def spaceman(secret_word):
 
     if wordGuessed == True:
         return 'Congratulations, you won!'
+        load_word()
+        playagain(secret_word)
     elif guesses_left== 0:
         print ('Sorry, you ran out of guesses. The word was ' + secret_word)
+        load_word()
+        playagain(secret_word)
 
 
 # These function calls that will start the game
