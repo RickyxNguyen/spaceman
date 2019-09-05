@@ -100,7 +100,19 @@ def playagain(play):
         print('Not a letter!')
         continue
 
-
+def checkletter():
+    while True:
+        guess = input('Please guess a letter: ').lower()
+        if guess.isalpha():
+            if len(guess)>1:
+                print('Not a valid input: '+ guess)
+                continue
+            else:
+                return guess
+                break
+        else:
+            print('Not a valid input: '+ guess)
+            continue
 
 
 def spaceman(secret_word):
@@ -121,15 +133,15 @@ def spaceman(secret_word):
     wordGuessed = False
     guess = ""
     letters_guessed =[]
-    guesses_left = 7
+    guesses_left = len(secret_word)
 
-    while guesses_left> 0 and guesses_left<= 7 and wordGuessed is False:
+    while guesses_left> 0 and guesses_left<= len(secret_word) and wordGuessed is False:
         if secret_word == get_guessed_word(secret_word, letters_guessed):
             wordGuessed = True
             break
         print ('You have ' + str(guesses_left) + ' guesses left.')
 
-        guess = input('Please guess a letter: ').lower()
+        guess = checkletter()
 
         if guess in secret_word:
             if guess in letters_guessed:
