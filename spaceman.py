@@ -67,7 +67,7 @@ def is_guess_in_word(guess, secret_word):
     '''
     # TODO: check if the letter guess is in the secret word
     
-    returnguess in secret_word
+    return guess in secret_word
 
 def playagain(play):
  while True:
