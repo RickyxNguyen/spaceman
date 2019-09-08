@@ -30,14 +30,10 @@ def is_word_guessed(secret_word, letters_guessed):
     '''
 
     # TODO: Loop through the letters in the secret_word and check if a letter is not in letters_guessed
-    counter =0
-    for x,i in secret_word:
-        if i in letters_guessed:
-    	    counter += 1
-    if counter == len(secret_word):
-    	return True
-    else:
-    	return False
+    letters = "".join([i for i in secret_word if i in letters_guessed])
+    if letters == secret_word:
+        return True
+    return False
     # pass
 
 
@@ -67,7 +63,10 @@ def is_guess_in_word(guess, secret_word):
     '''
     # TODO: check if the letter guess is in the secret word
     
-    return guess in secret_word
+    if secret_word.find(guess) > 0:
+        return True
+    else:
+        return False
 
 def playagain(play):
  while True:
@@ -131,6 +130,7 @@ def spaceman(secret_word):
         if guess in secret_word:
             if guess in letters_guessed:
                 print ("Oops! You've already guessed that letter: " + get_guessed_word(secret_word, letters_guessed))
+                is_word_guessed(secret_word,letters_guessed)
                 print ('------------')
             else:
                 letters_guessed.append(guess)
@@ -145,9 +145,8 @@ def spaceman(secret_word):
                 guesses_left-= 1
                 print ('Oops! That letter is not in the word: ' + get_guessed_word(secret_word, letters_guessed))
                 print ('------------')
-
-    if wordGuessed == True:
-        return 'Congratulations, you won!'
+    if is_word_guessed(secret_word,letters_guessed):
+        print('Congratulations, you won!')
         load_word()
         playagain(secret_word)
     elif guesses_left== 0:
