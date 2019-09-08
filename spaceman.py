@@ -59,7 +59,7 @@ def playagain(play):
             spaceman(secret_word)
         elif player =='n':
             print('Bye Bye!')
-            break
+            return False
         else:
             print('Not an option!')
             continue
