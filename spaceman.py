@@ -52,21 +52,9 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     # TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-    counter = 0
-    temporary = ['_']*len(secret_word)
-    for x, i in enumerate(secret_word):
-        if i in letters_guessed:
-            counter += 1
-            temporary.insert(counter-1,i)
-            temporary.pop(counter)
-            if counter == len(secret_word):
-                return ''.join(str(i) for i in temporary)
-        else:
-            counter += 1
-            temporary.insert(counter-1,'_')
-            temporary.pop(counter)
-            if counter == len(secret_word):
-                return ''.join(str(i) for i in temporary)
+    guessed_word = [i if i in letters_guessed else '_' for i in secret_word]
+    return "".join(guessed_word)
+
 
 def is_guess_in_word(guess, secret_word):
     '''
