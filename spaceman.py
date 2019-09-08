@@ -51,23 +51,6 @@ def get_guessed_word(secret_word, letters_guessed):
     guessed_word = [i if i in letters_guessed else '_' for i in secret_word]
     return "".join(guessed_word)
 
-
-def is_guess_in_word(guess, secret_word):
-    '''
-    A function to check if the guessed letter is in the secret word
-    Args:
-        guess (string): The letter the player guessed this round
-        secret_word (string): The secret word
-    Returns:
-        bool: True if the guess is in the secret_word, False otherwise
-    '''
-    # TODO: check if the letter guess is in the secret word
-    
-    if secret_word.find(guess) > 0:
-        return True
-    else:
-        return False
-
 def playagain(play):
  while True:
     player = input("Would you like to play again? (y/n): ").lower()
