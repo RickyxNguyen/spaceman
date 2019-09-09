@@ -2,7 +2,6 @@ import system
 import random
 
 
-
 def load_word():
     '''
     A function that reads a text file of words and randomly selects one to use as the secret word
@@ -10,7 +9,7 @@ def load_word():
     Returns: 
            string: The secret word to be used in the spaceman guessing game
     '''
-    f = open("/Users/rickynguyen/Desktop/dev/courses/FSP/spaceman/words.txt", "r")
+    f = open('words.txt', "r")
     words_list = f.readlines()
     f.close()
 
@@ -51,34 +50,36 @@ def get_guessed_word(secret_word, letters_guessed):
     guessed_word = [i if i in letters_guessed else '_' for i in secret_word]
     return "".join(guessed_word)
 
+
 def playagain(play):
- while True:
-    player = input("Would you like to play again? (y/n): ").lower()
-    if player.isalpha():
-        if player=='y':
-            spaceman(secret_word)
-        elif player =='n':
-            print('Bye Bye!')
-            return False
+    while True:
+        player = input("Would you like to play again? (y/n): ").lower()
+        if player.isalpha():
+            if player == 'y':
+                spaceman(secret_word)
+            elif player == 'n':
+                print('Bye Bye!')
+                return False
+            else:
+                print('Not an option!')
+                continue
         else:
-            print('Not an option!')
+            print('Not a letter!')
             continue
-    else:
-        print('Not a letter!')
-        continue
+
 
 def checkletter():
     while True:
         guess = input('Please guess a letter: ').lower()
         if guess.isalpha():
-            if len(guess)>1:
-                print('Not a valid input: '+ guess)
+            if len(guess) > 1:
+                print('Not a valid input: ' + guess)
                 continue
             else:
                 return guess
                 break
         else:
-            print('Not a valid input: '+ guess)
+            print('Not a valid input: ' + guess)
             continue
 
 
@@ -90,7 +91,7 @@ def spaceman(secret_word):
     '''
     # TODO: show the player information about the game according to the project spec
     print("Welcome to Spaceman!")
-    print ('------------')
+    print('------------')
     print("The secret word contains: " + str(len(secret_word)) + " letters")
     # TODO: Ask the player to guess one letter per round and check that it is only one letter
     # TODO: Check if the guessed letter is in the secret or not and give the player feedback
@@ -99,41 +100,45 @@ def spaceman(secret_word):
 
     wordGuessed = False
     guess = ""
-    letters_guessed =[]
+    letters_guessed = []
     guesses_left = len(secret_word)
 
-    while guesses_left> 0 and guesses_left<= len(secret_word) and wordGuessed is False:
+    while guesses_left > 0 and guesses_left <= len(secret_word) and wordGuessed is False:
         if secret_word == get_guessed_word(secret_word, letters_guessed):
             wordGuessed = True
             break
-        print ('You have ' + str(guesses_left) + ' guesses left.')
+        print('You have ' + str(guesses_left) + ' guesses left.')
 
         guess = checkletter()
 
         if guess in secret_word:
             if guess in letters_guessed:
-                print ("Oops! You've already guessed that letter: " + get_guessed_word(secret_word, letters_guessed))
-                is_word_guessed(secret_word,letters_guessed)
-                print ('------------')
+                print("Oops! You've already guessed that letter: " +
+                      get_guessed_word(secret_word, letters_guessed))
+                is_word_guessed(secret_word, letters_guessed)
+                print('------------')
             else:
                 letters_guessed.append(guess)
-                print ('Good guess: ' + get_guessed_word(secret_word, letters_guessed))
-                print ('------------')
+                print('Good guess: ' +
+                      get_guessed_word(secret_word, letters_guessed))
+                print('------------')
         else:
             if guess in letters_guessed:
-                print ("Oops! You've already guessed that letter: " + get_guessed_word(secret_word, letters_guessed))
-                print ('------------')
+                print("Oops! You've already guessed that letter: " +
+                      get_guessed_word(secret_word, letters_guessed))
+                print('------------')
             else:
                 letters_guessed.append(guess)
-                guesses_left-= 1
-                print ('Oops! That letter is not in the word: ' + get_guessed_word(secret_word, letters_guessed))
-                print ('------------')
-    if is_word_guessed(secret_word,letters_guessed):
+                guesses_left -= 1
+                print('Oops! That letter is not in the word: ' +
+                      get_guessed_word(secret_word, letters_guessed))
+                print('------------')
+    if is_word_guessed(secret_word, letters_guessed):
         print('Congratulations, you won!')
         load_word()
         playagain(secret_word)
-    elif guesses_left== 0:
-        print ('Sorry, you ran out of guesses. The word was ' + secret_word)
+    elif guesses_left == 0:
+        print('Sorry, you ran out of guesses. The word was ' + secret_word)
         load_word()
         playagain(secret_word)
 
