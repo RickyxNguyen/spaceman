@@ -1,6 +1,4 @@
-import system
 import random
-
 
 def load_word():
     '''
