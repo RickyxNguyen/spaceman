@@ -68,7 +68,7 @@ def playagain(play):
 
 def checkletter():
     while True:
-        guess = input('Please guess a letter: ').lower()
+        guess = input('Please guess a letter: ').lower().strip()
         if guess.isalpha():
             if len(guess) > 1:
                 print('Not a valid input: ' + guess)
