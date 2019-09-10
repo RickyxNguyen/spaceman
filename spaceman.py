@@ -54,7 +54,7 @@ def playagain(play):
         player = input("Would you like to play again? (y/n): ").lower()
         if player.isalpha():
             if player == 'y':
-                spaceman(secret_word)
+                spaceman(load_word())
             elif player == 'n':
                 print('Bye Bye!')
                 return False
@@ -133,11 +133,9 @@ def spaceman(secret_word):
                 print('------------')
     if is_word_guessed(secret_word, letters_guessed):
         print('Congratulations, you won!')
-        load_word()
         playagain(secret_word)
     elif guesses_left == 0:
         print('Sorry, you ran out of guesses. The word was ' + secret_word)
-        load_word()
         playagain(secret_word)
 
 
