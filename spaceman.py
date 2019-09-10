@@ -30,7 +30,8 @@ def is_word_guessed(secret_word, letters_guessed):
     letters = "".join([i for i in secret_word if i in letters_guessed])
     if letters == secret_word:
         return True
-    return False
+    else:
+        return False
     # pass
 
 
