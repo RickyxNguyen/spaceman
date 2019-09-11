@@ -1,5 +1,6 @@
 import random
 
+
 def load_word():
     '''
     A function that reads a text file of words and randomly selects one to use as the secret word
@@ -52,7 +53,7 @@ def get_guessed_word(secret_word, letters_guessed):
 
 def playagain(play):
     while True:
-        player = input("Would you like to play again? (y/n): ").lower()
+        player = input("Would you like to play again? (y/n): ").lower().strip()
         if player.isalpha():
             if player == 'y':
                 spaceman(load_word())
