@@ -1,6 +1,5 @@
 import random
 
-
 def load_word():
     '''
     A function that reads a text file of words and randomly selects one to use as the secret word
@@ -51,9 +50,8 @@ def get_guessed_word(secret_word, letters_guessed):
     return "".join(guessed_word)
 
 
-def playagain(play):
+def playagain(player):
     while True:
-        player = input("Would you like to play again? (y/n): ").lower().strip()
         if player.isalpha():
             if player == 'y':
                 spaceman(load_word())
@@ -68,7 +66,7 @@ def playagain(play):
             continue
 
 
-def checkletter():
+def get_valid_input():
     while True:
         guess = input('Please guess a letter: ').lower().strip()
         if guess.isalpha():
@@ -109,13 +107,12 @@ def spaceman(secret_word):
             break
         print('You have ' + str(guesses_left) + ' guesses left.')
 
-        guess = checkletter()
+        guess = get_valid_input()
 
-        if guess in secret_word:
+        if guess in letters_guessed:
             if guess in letters_guessed:
                 print("Oops! You've already guessed that letter: " +
                       get_guessed_word(secret_word, letters_guessed))
-                is_word_guessed(secret_word, letters_guessed)
                 print('------------')
             else:
                 letters_guessed.append(guess)
@@ -135,12 +132,29 @@ def spaceman(secret_word):
                 print('------------')
     if is_word_guessed(secret_word, letters_guessed):
         print('Congratulations, you won!')
-        playagain(secret_word)
+        player = input("Would you like to play again? (y/n): ").lower().strip()
+        playagain(player)
     elif guesses_left == 0:
         print('Sorry, you ran out of guesses. The word was ' + secret_word)
-        playagain(secret_word)
+        player = input("Would you like to play again? (y/n): ").lower().strip()
+        playagain(player)
 
 
 # These function calls that will start the game
 secret_word = load_word()
-spaceman(secret_word)
+# spaceman(secret_word)
+
+def test_guessed_word():
+    word = get_guessed_word("apple",['a','l','e'])
+    assert word == "a__le"
+    word = get_guessed_word("apple",['a','x','b'])
+    assert word == "a____"
+
+def test_word_guessed():
+    word = is_word_guessed('alligator',['a','l','i','g','t','o','r'])
+    assert word ==True
+    word = is_word_guessed('alligator',['a','l','i','t','o','r'])
+    assert word ==False
+def test_pay_again():
+    player = playagain('n')
+    assert player==False
