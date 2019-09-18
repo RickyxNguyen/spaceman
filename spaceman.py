@@ -145,16 +145,12 @@ secret_word = load_word()
 # spaceman(secret_word)
 
 def test_guessed_word():
-    word = get_guessed_word("apple",['a','l','e'])
-    assert word == "a__le"
-    word = get_guessed_word("apple",['a','x','b'])
-    assert word == "a____"
+    assert get_guessed_word("apple",['a','l','e']) == "a__le"
+    assert get_guessed_word("apple",['a','x','b']) == "a____"
 
 def test_word_guessed():
-    word = is_word_guessed('alligator',['a','l','i','g','t','o','r'])
-    assert word ==True
-    word = is_word_guessed('alligator',['a','l','i','t','o','r'])
-    assert word ==False
+    assert is_word_guessed('alligator',['a','l','i','g','t','o','r']) ==True
+    assert is_word_guessed('alligator',['a','l','i','t','o','r']) ==False
+    
 def test_pay_again():
-    player = playagain('n')
-    assert player==False
+    assert playagain('n')==False
